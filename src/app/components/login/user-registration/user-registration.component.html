@@ -1,0 +1,96 @@
+<h1 mat-dialog-title>User Registration</h1>
+<div mat-dialog-content>
+    <!--<section class="vh-100 gradient-custom"> -->
+        <div class="container" > <!-- py-5 h-100"> -->
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-12 col-xl-12">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                    <form #f [formGroup]="userForm">
+        
+                        <div class="row">
+                        <div class="col-md-6 mb-4">
+        
+                            <div class="form-outline">
+                                <input type="text" id="firstName" class="form-control form-control-lg" [ngClass]="formControls['firstName'].errors && (formControls['firstName']?.dirty || formControls['firstName']?.touched) ? 'mandatoryField': ''" formControlName="firstName"/>
+                                <label class="form-label" for="firstName">First Name</label>
+                            </div>
+        
+                        </div>
+                        <div class="col-md-6 mb-4">
+        
+                            <div class="form-outline">
+                            <input type="text" id="lastName" class="form-control form-control-lg" [ngClass]="formControls['lastName'].errors && (formControls['lastName']?.dirty || formControls['lastName']?.touched) ? 'mandatoryField': ''" formControlName="lastName"/>
+                            <label class="form-label" for="lastName">Last Name</label>
+                            </div>
+        
+                        </div>
+                        </div>
+        
+                        <div class="row">
+                        <div class="col-md-6 mb-4">
+        
+                            <div class="form-outline">
+                            <input type="text" class="form-control form-control-lg" id="email" formControlName="email" [ngClass]="formControls['email'].errors && (formControls['email']?.dirty || formControls['email']?.touched) ? 'mandatoryField': ''"/>
+                            <label for="email" class="form-label">Email</label>
+                            </div>
+        
+                        </div>
+                        <div class="col-md-6 mb-4">
+        
+                            <div class="form-outline">
+                            <input type="text" class="form-control form-control-lg" id="pwd" formControlName="pwd" [ngClass]="formControls['pwd'].errors && (formControls['pwd']?.dirty || formControls['pwd']?.touched) ? 'mandatoryField': ''"/>
+                            <label for="pwd" class="form-label">Password</label>
+                            </div>
+        
+                        </div>
+                        </div>
+        
+                        <div class="row">
+                        <div class="col-md-6 mb-4 pb-2">
+        
+                            <div class="form-outline">
+                            <input type="text" id="address" class="form-control form-control-lg" formControlName="address" [ngClass]="formControls['address'].errors && (formControls['address']?.dirty || formControls['address']?.touched) ? 'mandatoryField': ''"/>
+                            <label class="form-label" for="address">Address</label>
+                            </div>
+        
+                        </div>
+                        <div class="col-md-6 mb-4 pb-2">
+        
+                            <div class="form-outline">
+                            <input type="number" id="pinCode" class="form-control form-control-lg" formControlName="pinCode" [ngClass]="formControls['pinCode'].errors && (formControls['pinCode']?.dirty || formControls['pinCode']?.touched) ? 'mandatoryField': ''"/>
+                            <label class="form-label" for="pinCode">Pincode</label>
+                            </div>
+        
+                        </div>
+                        </div>
+        
+                        <div class="row">
+                            <div class="col-md-6">
+        
+                                <div class="form-outline">
+                                <input type="number" id="phoneNum" class="form-control form-control-lg"  formControlName="phoneNum" [ngClass]="formControls['phoneNum'].errors && (formControls['phoneNum']?.dirty || formControls['phoneNum']?.touched) ? 'mandatoryField': ''"/>
+                                <label class="form-label" for="phoneNum">Phone Number</label>
+                                </div>
+            
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-outline">
+                                <input type="number" id="altPhoneNum" class="form-control form-control-lg" formControlName="altPhoneNum"/>
+                                <label class="form-label" for="altPhoneNum">Alternate Phone Number</label>
+                                </div>
+            
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!--</section>-->
+</div>
+<div mat-dialog-actions>
+    <button mat-button [disabled]="!userForm.valid" (click)="saveUser()">Save</button>
+    <button mat-button mat-dialog-close>Cancel</button>
+</div>

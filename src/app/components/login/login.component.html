@@ -1,0 +1,50 @@
+<div class="parent clearfix">
+    <div class="bg-illustration">
+  
+      <div class="burger-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+  
+    </div>
+    
+    <div class="login">
+      <div class="container">
+        <h1>LOGIN</h1>
+        <div class="login-form">
+          <div *ngIf="invalidCredentials" class="alert alert-danger">
+            <div class="help-block">
+              Invalid username or password.
+            </div>
+        </div>
+          <form #f [formGroup]="loginForm">
+            <input type="email" placeholder="E-mail Address" formControlName="email" >
+            <div class="warn-msg" *ngIf="formControls['email']?.invalid && (formControls['email']?.dirty || formControls['email']?.touched)">
+                <div *ngIf=" formControls['email'].errors" class="help-block">
+                  <div *ngIf="formControls['email'].errors?.['required']">Email is required</div>
+                  <div *ngIf="formControls['email']?.errors?.['pattern']">
+                    Invalid email.
+                  </div>
+                </div>
+            </div>
+  
+            <input type="password" placeholder="Password" formControlName="pwd">
+            <div class="warn-msg" *ngIf="formControls['pwd']?.invalid && (formControls['pwd']?.dirty || formControls['pwd']?.touched)">
+              <div *ngIf="formControls['pwd'].errors" class="help-block">
+                <div *ngIf="formControls['pwd'].errors?.['required']">Password is required</div>
+              </div>
+            </div>
+  
+            <div class="forget-pass">
+              <a class="sign-up" (click)="openUserRegDialog()">Don’t have an account? Sign up</a>
+            </div>
+  
+            <button [disabled]="!loginForm.valid" (click)="login()" type="submit">LOG-IN</button>
+  
+          </form>
+        </div>
+    
+      </div>
+      </div>
+  </div>
