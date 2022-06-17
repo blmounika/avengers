@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 import { CommonService } from 'src/app/services/common.service';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 
@@ -13,7 +14,7 @@ import { UserRegistrationComponent } from './user-registration/user-registration
 })
 export class LoginComponent {
 
-  constructor(private commonService: CommonService, private dialog: MatDialog, private router: Router) {}
+  constructor(private commonService: CommonService, private dialog: MatDialog, private router: Router, private authService: AuthService) {}
   invalidCredentials = false;
   loginForm = new FormGroup({
     email: new FormControl('', [
@@ -40,8 +41,10 @@ export class LoginComponent {
       }
     },
     (error: any) => {
-      //this.showConfirm();
+      console.error(error);
     });
+    this.authService.login(userObj);
+    this.router.navigate(['home']);
   }
 
   openUserRegDialog() {

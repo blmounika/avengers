@@ -1,0 +1,45 @@
+
+<mat-card class="example-card" style="background-color: cadetblue;">
+    <mat-card-content>
+        <div class="row">
+            <div class="m-2 col-xs-3 col-md-3 col-lg-3">
+                <img class="flat-image" mat-card-image [src]="savedFlat.url" alt=""></div>
+            <div class="col-xs-7 col-md-7 col-lg-7">
+                <div class="col">
+                    <div>
+                        <p> <b>Project: </b>{{ savedFlat.projectName }} </p>
+                        <p> <b>Flat Number: </b>{{ savedFlat.flatNo}} </p>
+                        <p> <b>Flat Size: </b>{{ savedFlat.size}} </p>
+                        <p> <b>Direction: </b>{{ savedFlat.direction}} </p>
+                        <p><b>Flat Type: </b>{{savedFlat. flatType}}</p>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <br><br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- <div class="col">
+                            <button mat-raised-button [matMenuTriggerFor]="menu">Packages <mat-icon>arrow_drop_down</mat-icon></button>
+                            <mat-menu #menu="matMenu">
+                            <button (click)="onPackageSelection(option)" *ngFor="let option of packages" mat-menu-item>{{option}}</button>
+                            </mat-menu>
+                        </div> -->
+                        <div class="col">
+                            <button mat-raised-button (click)="onViewPackages()">View</button>
+                        </div>
+                        <!-- <div class="col">
+                            <button mat-raised-button [matMenuTriggerFor]="menu3">A La Carte  <mat-icon>arrow_drop_down</mat-icon></button>
+                            <mat-menu #menu3="matMenu">
+                            <button (click)="onAlacarteSelection(option)" *ngFor="let option of alacarte" mat-menu-item>{{option}}</button>
+                            </mat-menu>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <mat-icon style="float: right" (click)="deleteFlat(savedFlat)">delete</mat-icon>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

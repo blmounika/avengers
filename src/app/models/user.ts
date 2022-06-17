@@ -1,4 +1,5 @@
 export interface User {
+    userId: number;
     firstName: string;
     email: string;
     pwd: string;
@@ -13,6 +14,7 @@ export interface User {
 }
 
 const user: User = {
+    userId: 0,
     firstName: '',
     email: '',
     pwd: '',

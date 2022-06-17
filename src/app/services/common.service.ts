@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { BehaviorSubject, map, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,14 +9,20 @@ import { environment } from 'src/environments/environment';
 export class CommonService {
   baseappurl = '';
   header: HttpHeaders;
+  flatDetail = new BehaviorSubject({});
 
   constructor(private http: HttpClient) {
      this.header = this.setHeaders();
      this.getConfigUrl();
+     const flat = localStorage.getItem('flat');
+     if (flat) {
+        this.flatDetail.next(flat); 
+     }
    }
 
   private setHeaders(): HttpHeaders {
     const hdrObj = { 'Content-Type': 'application/json' };
+    
     const ret = new HttpHeaders(hdrObj);
     return ret;
 
@@ -90,6 +96,11 @@ postDataWithHeader(mappingURL: string, modelData: any, optionalHeader: any) {
 
       .pipe(map((res: any) => res));
 
+}
+
+viewFlat(data: any) {
+    localStorage.setItem('flat', data);
+    this.flatDetail.next(data);
 }
 
 }

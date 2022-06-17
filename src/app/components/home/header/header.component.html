@@ -1,0 +1,19 @@
+<div class="sticky-top">
+    <nav class="navbar fixed-top navbar-light" style="background-color: #008b8b;z-index: 1050;">
+    <a class="navbar-brand ml-2" style="margin-left: 10px; color: #ffffff" href="#">
+        <img src="../../../assets/images/home-logo.png" width="40" height="40" class="d-inline-block" alt="">
+        Home Solutions
+    </a>
+    <span *ngIf="user" class="mr-10">
+        <mat-icon>account_circle</mat-icon>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>arrow_drop_down</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="logout()">
+              <span>Logout</span>
+            </button>
+          </mat-menu>
+    </span>
+</nav>
+</div>

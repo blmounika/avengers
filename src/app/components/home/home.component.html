@@ -1,0 +1,65 @@
+<div class="container main">
+  <mat-card class="main-card">
+    <div class="home-page">
+      <h2 style="color:black">{{ savedFlats.length ? 'Saved Flats' : 'Please add a Flat'}}</h2>
+      <app-saved-flats *ngFor="let flatDetail of savedFlats" [savedFlat]="flatDetail" (flatDeleted)="deleteFlat($event)"></app-saved-flats>
+        <mat-accordion class="example-headers-align" multi>
+            <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                Add Flat
+                </mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <form #f [formGroup]="ProjectSearchForm">
+              <mat-form-field appearance="fill">
+                  <mat-label>Flat Number</mat-label>
+                  <input matInput type="text" formControlName="flatNo">
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Project</mat-label>
+                <input type="text" matInput formControlName="project" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option.projName}} , {{ option.address}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+              <button style="background-color: cadetblue" [disabled]="!ProjectSearchForm.valid" mat-raised-button class="save-button" (click)="searchFlatDeatils()">Search</button>
+            </form>
+
+            <mat-card class="example-card" *ngIf="projectDetail && searchClicked">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Flat Details</mat-card-title>
+                <mat-card-subtitle></mat-card-subtitle>
+              </mat-card-header>
+              
+              <mat-card-content>
+                <div class="row">
+                  <div class="m-2 col-xs-3 col-md-3 col-lg-3"><img class="flat-image" mat-card-image [src]="projectDetail.url" alt="Photo of a Shiba Inu"></div>
+                  <div class="col-xs-8 col-md-8 col-lg-8">
+                    <p> <b>Project: </b>{{ getProjectName(projectDetail.projId) }} </p>
+                    <p> <b>Flat Number: </b>{{ projectDetail.flatNo}} </p>
+                    <p> <b>Flat Size: </b>{{ projectDetail.size}} </p>
+                    <p> <b>Direction: </b>{{ projectDetail.direction}} </p>
+                  </div>
+                </div>
+                <h4>Are you sure you want to add the flat ? </h4> 
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-button>Cancel</button>
+                <button mat-raised-button save-button (click)="addFlat(projectDetail)">Add</button>
+              </mat-card-actions>
+            </mat-card>
+            
+        
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+  </mat-card>
+</div>

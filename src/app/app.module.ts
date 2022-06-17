@@ -7,17 +7,24 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
 import { UserRegistrationComponent } from './components/login/user-registration/user-registration.component';
-import { ProjectComponent } from './components/project/project.component';
+import { HomeComponent } from './components/home/home.component';
+import { MaterialModule } from './material/material.module';
+import { HeaderComponent } from './components/home/header/header.component';
+import { SavedFlatsComponent } from './components/home/saved-flats/saved-flats.component';
+import { ProjectComponent } from './components/home/project/project.component';
+import { CustomiseComponent } from './components/home/project/customise/customise.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     UserRegistrationComponent,
-    ProjectComponent
+    HomeComponent,
+    HeaderComponent,
+    SavedFlatsComponent,
+    ProjectComponent,
+    CustomiseComponent
   ],
   imports: [
     BrowserModule,
@@ -26,8 +33,7 @@ import { ProjectComponent } from './components/project/project.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatDialogModule,
-    MatButtonModule
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
