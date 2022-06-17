@@ -12,7 +12,7 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class HomeComponent implements OnInit {
   constructor(private commonService: CommonService, private authService: AuthService) {}
-  projectDetail: any = { projId: 1, flatNo: "507", size: "1295", direction: "WEST", url: "../../assets/images/flat3D.PNG"};
+  projectDetail= { projId: 1, flat: "507", size: "1295", direction: "WEST", url: "../../assets/images/flat3D.PNG"};
   searchClicked = false;
   user: any;
 
@@ -23,11 +23,11 @@ export class HomeComponent implements OnInit {
       Validators.required]),
   });
 
-  projects: Project[]=   [
-    {projId: 1, projName: 'Avatar', builder: 'My House Constructions', address: 'Road No 1, Banjara Hills'}, 
-    {projId: 2, projName: 'Bvatar1', builder: 'Famous Constructions', address: 'Road No 2, Kukatpally'},
-    {projId: 3, projName: 'Cvatar', builder: 'My House Constructions', address: 'Road No 1, JNTU'}];
-  
+  // projects: Project[]=   [
+  //   {projId: 1, projName: 'Avatar', builder: 'My House Constructions', address: 'Road No 1, Banjara Hills'}, 
+  //   {projId: 2, projName: 'Bvatar1', builder: 'Famous Constructions', address: 'Road No 2, Kukatpally'},
+  //   {projId: 3, projName: 'Cvatar', builder: 'My House Constructions', address: 'Road No 1, JNTU'}];
+  projects: Project[] =[];
   filteredOptions: Observable<Project[]> | undefined;
   
   savedFlats = [
@@ -59,6 +59,11 @@ export class HomeComponent implements OnInit {
       if (res.status === 'Error') {
       } else {
         this.projects = res;
+        this.filteredOptions = this.formControls['project'].valueChanges.pipe(
+          startWith(''),
+          map(value => (typeof value === 'string' ? value : value.name)),
+          map(name => (name ? this.filter(name) : this.projects.slice())),
+        );
       }
     },
     (error: any) => {
@@ -115,7 +120,7 @@ export class HomeComponent implements OnInit {
       (res: any) => {
       if (res.status === 'Error') {
       } else {
-        this.projectDetail = undefined;
+       // this.projectDetail = undefined;
         this.savedFlats = [...this.savedFlats, ...data];
       }
     },
@@ -123,7 +128,7 @@ export class HomeComponent implements OnInit {
       console.error(error);
     });
     // to be deleted
-    this.projectDetail = undefined;
+   // this.projectDetail = undefined;
         this.savedFlats = [...this.savedFlats, ...data];
   }
 
