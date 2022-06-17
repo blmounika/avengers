@@ -37,14 +37,14 @@ export class LoginComponent {
         this.invalidCredentials = true;
       } else {
         this.invalidCredentials = false;
-        this.router.navigate(['project']);
+        this.authService.login(userObj);
+        this.router.navigate(['home']);
       }
     },
     (error: any) => {
       console.error(error);
     });
-    this.authService.login(userObj);
-    this.router.navigate(['home']);
+
   }
 
   openUserRegDialog() {
