@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 export class CommonService {
   baseappurl = '';
   header: HttpHeaders;
-  flatDetail = new BehaviorSubject({});
+  flatDetail = new BehaviorSubject("");
 
   constructor(private http: HttpClient) {
      this.header = this.setHeaders();

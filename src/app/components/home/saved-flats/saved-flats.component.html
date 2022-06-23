@@ -26,7 +26,16 @@
                             </mat-menu>
                         </div> -->
                         <div class="col">
-                            <button mat-raised-button (click)="onViewPackages()">View</button>
+                            <button mat-raised-button (click)="onViewPackages('highly')">Highly Furnished</button>
+                        </div>
+                        <div class="col">
+                            <button mat-raised-button (click)="onViewPackages('fully')">Fully Furnished</button>
+                        </div>
+                        <div class="col">
+                            <button mat-raised-button (click)="onViewPackages('semi')">Semi Furnished</button>
+                        </div>
+                        <div class="col">
+                            <button mat-raised-button (click)="onViewPackages('customize')">Customize</button>
                         </div>
                         <!-- <div class="col">
                             <button mat-raised-button [matMenuTriggerFor]="menu3">A La Carte  <mat-icon>arrow_drop_down</mat-icon></button>

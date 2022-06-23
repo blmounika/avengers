@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/app/models/user';
 import { CommonService } from 'src/app/services/common.service';
 
@@ -11,7 +12,8 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class UserRegistrationComponent implements OnInit {
 
-  constructor(private commonService: CommonService, public dialogRef: MatDialogRef<UserRegistrationComponent>) { }
+  constructor(private commonService: CommonService, 
+    public dialogRef: MatDialogRef<UserRegistrationComponent>, private _snackBar: MatSnackBar) { }
   
   userForm = new FormGroup({
     firstName: new FormControl('', [
@@ -35,6 +37,12 @@ export class UserRegistrationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'X', {
+      duration: 5 * 1000,
+    });
+  }
+
   saveUser() {
     if(this.userForm.invalid){
       return;
@@ -42,15 +50,21 @@ export class UserRegistrationComponent implements OnInit {
     let userObj: User = Object.assign({}, this.userForm.value);
     this.commonService.postData('/user/register', userObj).subscribe(
       (res: any) => {
-      if (res.status === 'Error') {
-        //this.showWarning(res.statusText);
-      } else {
         this.dialogRef.close();
-      }
+        this.dialogRef.afterClosed().subscribe(result => {
+          this.openSnackBar(res);
+        });
     },
     (error: any) => {
-      //this.showConfirm();
+      console.log(error);
     });
+
+    //remove code
+    this.dialogRef.close();
+        this.dialogRef.afterClosed().subscribe(result => {
+          let snackBarRef = this.openSnackBar("User saved successfully");
+         
+        });
   }
 
   get formControls() {

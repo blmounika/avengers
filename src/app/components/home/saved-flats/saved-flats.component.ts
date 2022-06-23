@@ -31,9 +31,9 @@ export class SavedFlatsComponent implements OnInit {
     console.log( "flat deleted:" + flatDetail)
   }
 
-  onViewPackages() {
-    this.commonService.viewFlat(this.savedFlat);
-    this.router.navigate(['project', 'premium']); //{queryParams: option});
+  onViewPackages(packages: String) {
+    this.commonService.viewFlat(JSON.stringify(this.savedFlat));
+    this.router.navigate(['project', packages]); //{queryParams: option});
   }
 
 }

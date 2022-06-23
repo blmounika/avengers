@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,7 +14,8 @@ import { UserRegistrationComponent } from './user-registration/user-registration
 })
 export class LoginComponent {
 
-  constructor(private commonService: CommonService, private dialog: MatDialog, private router: Router, private authService: AuthService) {}
+  constructor(private commonService: CommonService, 
+    private dialog: MatDialog, private router: Router, private authService: AuthService) {}
   invalidCredentials = false;
   loginForm = new FormGroup({
     email: new FormControl('', [

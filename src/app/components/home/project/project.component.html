@@ -23,12 +23,12 @@
 
                     <mat-card class="example-card" style="background-color: darkslategray;">
                         <mat-card-header>
-                            <mat-card-title class="font-bold">{{selectedProject | uppercase}}</mat-card-title>
+                            <mat-card-title class="font-bold">{{ this.selectedProject | uppercase}}</mat-card-title>
                             <mat-card-subtitle></mat-card-subtitle>
                         </mat-card-header>
               
-                        <mat-card-content [ngStyle]="(this.selectedProject != 'premium' && this.selectedProject != 'economy')? {backgroundColor: 'rgb(26, 26, 26)'}: null">
-                            <div class="col-md-12 mb-2" *ngIf="selectedProject == 'premium' || selectedProject == 'economy'">
+                        <mat-card-content [ngStyle]="(this.param != 'highly' && this.param != 'fully' && param == 'semi')? {backgroundColor: 'rgb(26, 26, 26)'}: null">
+                            <div class="col-md-12 mb-2" *ngIf="flatDetail && param == 'highly' || param == 'fully' || param == 'semi'">
                                 <div class="row">
                                     <div class="col-md-8">
                                         <img class="main-image" mat-card-image [src]="mainImage" alt="">
@@ -49,21 +49,22 @@
                                                 </div>
                                                 <hr>
                                                 <h4 class="font-bold" mt-2>Total Price</h4>
-                                                <p>{{specifications.totalEstimation | currency}}</p>
+                                                <p>{{specifications.totalEstimation | currency: "INR":"symbol"}}</p>
                                             </mat-card-content>
                                             <mat-card-actions>
                                                 <button mat-raised-button>Pay</button>
-                                                <button mat-raised-button>Help</button>
+                                                <button mat-raised-button>Contact</button>
+                                                <button mat-raised-button>Compare</button>
                                             </mat-card-actions>
                                         </mat-card>
                                     </div>
                                 </div>
                             </div>
                             <div style="padding: 10px">
-                                <app-customise *ngIf="this.selectedProject == 'customise'"></app-customise>
-                                <h2 *ngIf="this.selectedProject != 'customise' && this.selectedProject != 'premium' && this.selectedProject != 'economy'"> No Items to show. </h2>
+                                <app-customise *ngIf="this.param == 'customize'"></app-customise>
+                                <h2 *ngIf="this.param != 'customize' && this.param != 'highly' && this.param != 'fully' && param != 'semi'"> No Items to show. </h2>
                             </div>
-                            <div class="row" *ngIf="selectedProject == 'premium' || selectedProject == 'economy'">
+                            <div class="row" *ngIf="param == 'highly' || param == 'fully' || param == 'semi'">
                                 <div *ngFor="let img of specifications.images" mat-card-image class="col">
                                     <button class="img-button" (click)="changeImage(img)">
                                             <img class="flat-image" [src]="img" alt="">
