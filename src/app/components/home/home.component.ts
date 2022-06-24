@@ -12,7 +12,7 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class HomeComponent implements OnInit {
   constructor(private commonService: CommonService, private authService: AuthService) {}
-  projectDetail= { projId: 1, flat: "507", size: "1295", direction: "WEST", url: "../../assets/images/flat3D.PNG"};
+  projectDetail:{ projId: number; projectName: string; flat: string; size: string; direction: string; url: string; type: string; } | undefined ;
   searchClicked = false;
   user: any;
 
@@ -30,17 +30,23 @@ export class HomeComponent implements OnInit {
   projects: Project[] =[];
   filteredOptions: Observable<Project[]> | undefined;
   
-  savedFlats = [
-    { projId: 1, projectName:"Avatar, Road No 1, Banjara Hills",  flatNo: "507", size: "1295 Sq.ft", direction: "West", url: "../../assets/images/flat3D.PNG", flatType: '3BHK'},
-    { projId: 2, projectName:"Frozen Hill, Road No 2, Kukkatpally", flatNo: "213", size: "1456 Sq.ft", direction: "East", url: "../../assets/images/flat3D.PNG", flatType: '2BHK'}
-  ]
+   savedFlats!: { projId: number; projectName: string; flat: string; size: string; direction: string; url: string; type: string; }[]; //[
+   //   { projId: 1, projectName:"Avatar, Road No 1, Banjara Hills",  flat: "507", size: "1295 Sq.ft", direction: "West", url: "../../assets/images/flat3D.PNG", flatType: '3BHK'},
+   //   { projId: 2, projectName:"Frozen Hill, Road No 2, Kukkatpally", flat: "213", size: "1456 Sq.ft", direction: "East", url: "../../assets/images/flat3D.PNG", flatType: '2BHK'}
+   // ]
+ //[
+  //   { projId: 1, projectName:"Avatar, Road No 1, Banjara Hills",  flat: "507", size: "1295 Sq.ft", direction: "West", url: "../../assets/images/flat3D.PNG", flatType: '3BHK'},
+  //   { projId: 2, projectName:"Frozen Hill, Road No 2, Kukkatpally", flat: "213", size: "1456 Sq.ft", direction: "East", url: "../../assets/images/flat3D.PNG", flatType: '2BHK'}
+  // ]
 
 
   get formControls() { return this.ProjectSearchForm.controls; }
 
   ngOnInit() {
     this.getProjects();
+    
     this.user = this.authService.getUser();
+    this.getSavedFlats();
     this.filteredOptions = this.formControls['project'].valueChanges.pipe(
       startWith(''),
       map(value => (typeof value === 'string' ? value : value.name)),
@@ -120,8 +126,8 @@ export class HomeComponent implements OnInit {
       (res: any) => {
       if (res.status === 'Error') {
       } else {
-       // this.projectDetail = undefined;
-        this.savedFlats = [...this.savedFlats, ...data];
+        this.projectDetail =undefined;
+        this.getSavedFlats();
       }
     },
     (error: any) => {
@@ -129,24 +135,24 @@ export class HomeComponent implements OnInit {
     });
     // to be deleted
    // this.projectDetail = undefined;
-        this.savedFlats = [...this.savedFlats, ...data];
+      //  this.savedFlats = [...this.savedFlats, ...data];
   }
 
   deleteFlat(data: any) {
     const url = "user/" + this.user.userId + "/deleteFlat";
-    this.savedFlats = this.savedFlats.filter(flat => flat.flatNo != data.flatNo);
-    const requestBody = { projId: data.projId, flatNo: data.flatNo}
+    this.savedFlats = this.savedFlats.filter(flat => flat.flat != data.flat);
+    const requestBody = { projId: data.projId, flatNo: data.flat}
     this.commonService.postData(url, requestBody).subscribe(
       (res: any) => {
       if (res.status === 'Error') {
       } else {
-        this.savedFlats = this.savedFlats.filter(flat => flat.flatNo != data.flatNo);
+        this.savedFlats = this.savedFlats.filter(flat => flat.flat != data.flatNo);
       }
     },
     (error: any) => {
       console.error(error);
     });
     // to be deleted
-    this.savedFlats = this.savedFlats.filter(flat => flat.flatNo != data.flatNo);
+    this.savedFlats = this.savedFlats.filter(flat => flat.flat != data.flatNo);
   }
 }
