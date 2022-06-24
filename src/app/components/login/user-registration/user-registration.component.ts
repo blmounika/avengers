@@ -59,12 +59,7 @@ export class UserRegistrationComponent implements OnInit {
       console.log(error);
     });
 
-    //remove code
-    this.dialogRef.close();
-        this.dialogRef.afterClosed().subscribe(result => {
-          let snackBarRef = this.openSnackBar("User saved successfully");
-         
-        });
+   
   }
 
   get formControls() {
