@@ -355,10 +355,28 @@ a[href*="#followme"]::before {
 /*-------------------------------*/
 .font-bold {
   font-weight: bold;
-  font-family: sans-serif;
-  ;
+  font-family: cursive;
 }
 
 .main-image {
   height: 100%;
+}
+
+.boq-header {
+    width: 100px;
+    max-width: 100px;
+    padding-right: 5px;
+}
+.boq-table {
+  tr {
+    margin: 10px 10px 10px 10px;
+  }
+}
+.boq-data {
+    width: 120px;
+    max-width: 120px;
+    padding-right: 5px;
+    word-break: break-all;
+    font-size: smaller;
+    line-height: inherit;
 }

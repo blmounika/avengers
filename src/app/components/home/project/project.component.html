@@ -27,7 +27,7 @@
                             <mat-card-subtitle></mat-card-subtitle>
                         </mat-card-header>
               
-                        <mat-card-content [ngStyle]="(this.param != 'highly' && this.param != 'fully' && param == 'semi')? {backgroundColor: 'rgb(26, 26, 26)'}: null">
+                        <mat-card-content [ngStyle]="(this.param != 'highly' && this.param != 'fully' && param != 'semi')? {backgroundColor: 'rgb(26, 26, 26)'}: null">
                             <div class="col-md-12 mb-2" *ngIf="flatDetail && param == 'highly' || param == 'fully' || param == 'semi'">
                                 <div class="row">
                                     <div class="col-md-8">
@@ -41,12 +41,40 @@
                                             <mat-card-content>
                                                 <hr>
                                                 <h4 class="font-bold">BOQ</h4>
-                                                <div *ngFor="let boq of specifications.boq">
+                                                <!--<div *ngFor="let boq of specifications.boq">
                                                     <span> <span class="font-bold">Item: </span>{{ boq.item }} </span>  |  
                                                     <span> <span class="font-bold">Quantity: </span>{{ boq.quantity}} </span>  |  
                                                     <span> <span class="font-bold">Brand: </span>{{ boq.brand}} </span>  | 
                                                     <span> <span class="font-bold">Model: </span>{{ boq.model}} </span>  
-                                                </div>
+                                                </div> -->
+                                                <!--<table *ngFor="let boq of specifications.boq">
+                                                    <tr>
+                                                        <th class="boq-header"><span class="font-bold">Item</span></th>
+                                                        <th class="boq-header"><span class="font-bold">Quantity</span></th>
+                                                        <th class="boq-header"><span class="font-bold">Brand</span></th>
+                                                        <th class="boq-header"><span class="font-bold">Model</span></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="boq-data">{{ boq.item }} </td>
+                                                        <td class="boq-data">{{ boq.quantity }} </td>
+                                                        <td class="boq-data">{{ boq.brand }} </td>
+                                                        <td class="boq-data">{{ boq.model }} </td>
+                                                    </tr>
+                                                </table> -->
+                                                <table class="boq-table">
+                                                    <tr>
+                                                        <th class="boq-header"><span class="font-bold">Item</span></th>
+                                                        <th class="boq-header"><span class="font-bold">Quantity</span></th>
+                                                        <th class="boq-header"><span class="font-bold">Brand</span></th>
+                                                        <th class="boq-header"><span class="font-bold">Model</span></th>
+                                                    </tr>
+                                                    <tr *ngFor="let boq of specifications.boq">
+                                                        <td class="boq-data">{{ boq.item }} </td>
+                                                        <td class="boq-data">{{ boq.quantity }} </td>
+                                                        <td class="boq-data">{{ boq.brand }} </td>
+                                                        <td class="boq-data">{{ boq.model }} </td>
+                                                    </tr>
+                                                </table>
                                                 <hr>
                                                 <h4 class="font-bold" mt-2>Total Price</h4>
                                                 <p>{{specifications.totalEstimation | currency: "INR":"symbol"}}</p>

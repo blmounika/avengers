@@ -69,14 +69,14 @@ export class ProjectComponent implements OnInit {
   specificationsSemi = {
     images: [],
     boq: [
-      { item: 'AC', quantity: 4, brand: 'LG',  model:'M123'},
+      { item: 'AC', quantity: 2, brand: 'LG',  model:'M123'},
       { item: 'Refrigerator', quantity: 1, brand: 'LG',  model:'R1223'},
       { item: 'Washing Machine', quantity: 1, brand: 'LG',  model:'W123'},
       { item: 'TV', quantity: 1, brand: 'SONY',  model:'R1223'},
-      { item: 'Fan', quantity: 6, brand: 'Samsung',  model:'M123R5'},
-      { item: 'Light', quantity: 15, brand: 'Ciska',  model:'CEA12'},
+      { item: 'Fan', quantity: 4, brand: 'Samsung',  model:'M123R5'},
+      { item: 'Light', quantity: 10, brand: 'Ciska',  model:'CEA12'},
     ],
-    totalEstimation: 1200000
+    totalEstimation: 800000
   };
 
   changeImage(image: string) {
@@ -162,6 +162,7 @@ export class ProjectComponent implements OnInit {
     this.router.navigate(['project', name]);
     if (name == 'highly' || name == 'fully' || name == 'semi') {
       this.getPackages({type: name});
+      this.setData(this.flatDetail);
     }
   }
 

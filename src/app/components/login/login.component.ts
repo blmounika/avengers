@@ -38,6 +38,7 @@ export class LoginComponent {
         this.invalidCredentials = true;
       } else {
         this.invalidCredentials = false;
+        userObj.userId = res;
         this.authService.login(userObj);
         this.router.navigate(['home']);
       }
