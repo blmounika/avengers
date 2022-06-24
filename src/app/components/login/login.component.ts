@@ -37,6 +37,7 @@ export class LoginComponent {
       if (res.status === 'Error') {
         this.invalidCredentials = true;
       } else {
+        userObj.userId = res;
         this.invalidCredentials = false;
         userObj.userId = res;
         this.authService.login(userObj);

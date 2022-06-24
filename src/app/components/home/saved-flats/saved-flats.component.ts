@@ -8,14 +8,14 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./saved-flats.component.scss']
 })
 export class SavedFlatsComponent implements OnInit {
-  @Input() savedFlat: {projId: number, projectName: string, flatNo: string, size: string, direction: string, url: string, flatType: string} = {
+  @Input() savedFlat: {projId: number, projectName: string, flat: string, size: string, direction: string, url: string, type: string} = {
     projId: 0,
     projectName: '',
-    flatNo: '',
+    flat: '',
     size: '',
     direction: '',
     url: '',
-    flatType: ''
+    type: ''
   };
   packages = ['Economy', 'Premium'];
   alacarte = ['Electronics', 'Electrical', 'Mechanical', 'Plumbing', 'Furnishing', 'Interiors', 'Furniture'];

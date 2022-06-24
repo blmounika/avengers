@@ -121,15 +121,15 @@ export class ProjectComponent implements OnInit {
 
   setData(data?: any) {
     this.specifications = this.param == 'highly' ? this.specificationsPremium : this.param == 'fully' ? this.specificationsEconomy : this.specificationsSemi;
-    this.specifications.images = data.flatType.toLowerCase() == '2bhk' ? this.images2bhk: this.images3bhk;
+    this.specifications.images = data.type.toLowerCase() == '2bhk' ? this.images2bhk: this.images3bhk;
     const image = this.param == 'highly' ? 'premium' : this.param == 'fully' ? 'economy' : 'semi'
-    this.specifications.images[0] = '../../../../assets/images/package-' + image + '-' + data.flatType.toLowerCase() + '.PNG';
+    this.specifications.images[0] = '../../../../assets/images/package-' + image + '-' + data.type.toLowerCase() + '.PNG';
     if (this.param == 'highly') {
-      this.specifications.totalEstimation = this.estimations[data.flatType.toLowerCase()].premium;
+      this.specifications.totalEstimation = this.estimations[data.type.toLowerCase()].premium;
     } else if (this.param == 'fully') {
-      this.specifications.totalEstimation = this.estimations[data.flatType.toLowerCase()].economy;
+      this.specifications.totalEstimation = this.estimations[data.type.toLowerCase()].economy;
     } else {
-      this.specifications.totalEstimation = this.estimations[data.flatType.toLowerCase()].semi;
+      this.specifications.totalEstimation = this.estimations[data.type.toLowerCase()].semi;
     }
     this.mainImage = this.param == 'highly' ? this.specifications.images[0] : this.param == 'fully' ? this.specificationsEconomy.images[0] : this.specificationsSemi.images[0];
   }
@@ -139,7 +139,7 @@ export class ProjectComponent implements OnInit {
   }
 
   getPackages(data: any) {
-    const url = "getQuote/" + data.flatType + "/packages?type=" + data.type;
+    const url = "getQuote/" + data.type + "/packages?type=" + data.package;
     this.commonService.getData(url).subscribe(
       (res: any) => {
       if (res.status === 'Error') {
@@ -161,7 +161,7 @@ export class ProjectComponent implements OnInit {
     this.selectedProject = project.name;
     this.router.navigate(['project', name]);
     if (name == 'highly' || name == 'fully' || name == 'semi') {
-      this.getPackages({type: name});
+      this.getPackages({package: name});
       this.setData(this.flatDetail);
     }
   }
